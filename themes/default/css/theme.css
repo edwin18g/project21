@@ -2258,7 +2258,8 @@ label {
     margin-top: 20px;
 }
 .hero h1, .hero h2, .hero h3, .hero h4, .hero h5, .hero h6{
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	text-shadow: 6px 6px 5px rgb(53, 2, 2);
+	font-weight: bold;
 }
 .hero-scene-event{
 	text-align: center;

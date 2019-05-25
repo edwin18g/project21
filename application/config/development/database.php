@@ -66,8 +66,13 @@ $db['default'] = array(
 	'dsn'          => '',
 	'hostname'     => 'localhost',
 	'username'     => 'root',
+<<<<<<< HEAD
 	'password'     => 'fBfbLTHu7T4e',
 	'database'     => 'thedesigns.in',
+=======
+	'password'     => 'root',
+	'database'     => 'pixoart',
+>>>>>>> 3684c24a42e9aeeb30c8a46d4284a8d8ce3cf077
 	'dbdriver'     => 'mysqli',
 	'dbprefix'     => '',
 	'pconnect'     => FALSE,

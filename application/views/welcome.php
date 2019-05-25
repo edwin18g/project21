@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
+<div ></div>
  <!-- Section Slider -->
 <section class="pad-none parallax-bg hero">
     <div class="owl-carousel full-screen dots-inline" 
@@ -20,14 +20,18 @@
         data-delay="3000" 
         data-navigation="false"
     >
-        <?php for($i = 1; $i<=5;$i++) { if($this->settings->{'banner_title_'.$i}) { ?>
+        <?php for($i = 1; $i<=3;$i++) { if($this->settings->{'banner_title_'.$i}) { ?>
         <div class="item typo-light">
             <img src="<?php echo base_url('upload/home/').$this->settings->{'banner_image_'.$i} ?>" alt="" class="img-responsive">
             <div class="container slider-content vmiddle text-center">
                 <div class="row">
-                    <div class="col-md-offset-2 col-md-8">
-                        <h3 class="text-uppercase" data-animation="fadeInUp" data-animation-delay="800"><?php echo $this->settings->{'banner_title_'.$i} ?></h3>
-                        <p class="animated" data-animation="fadeInUp" data-animation-delay="800"><?php echo $this->settings->{'banner_description_'.$i} ?></p>
+                    <div class="col-md-offset-2 col-md-8" style="    background: #0000006e;padding: 15px; border-radius: 20px
+">
+                        <h3 class="text-uppercase" data-animation="fadeInUp" ><?php echo $this->settings->{'banner_title_'.$i} ?></h3>
+                        <?php if(in_array($i, array(3))):?>
+                        <p class="animated" data-animation="fadeInUp" >
+                            <?php echo $this->settings->{'banner_description_'.$i} ?></p> 
+                    <?php endif;?>
                     </div>  
                 </div>  
             </div>
@@ -92,7 +96,7 @@
                             <?php } elseif($val->starting_price) { ?>
                             <span class="cat bg-blue"><?php echo lang('c_l_starts_from'); ?> : <?php echo $val->starting_price.' '.$this->settings->default_currency; ?></span>
                             <?php } else { ?>
-                            <span class="cat bg-yellow"><?php echo lang('action_coming_soon'); ?></span>
+                            <span class="cat bg-yellow">Active</span>
                             <?php } ?>
                         </div><!-- Course Banner Image -->
                     </a>
@@ -102,7 +106,7 @@
                         <div class="teacher-wrap">
                             <?php if(empty($val->tutor)) { ?>
                             <img class="img-responsive" src="<?php echo base_url().'themes/default/images/teacher/thumb-teacher-01.jpg' ?>" width="100" height="100">
-                            <h5><small><?php echo lang('action_coming_soon'); ?></small></h5>
+                            <h5 class=""><small><?php echo lang('action_coming_soon'); ?></small></h5>
                             <?php } else { ?>
                             <a href="<?php echo site_url('tutors/').$val->tutor->username ?>">
                                 <img alt="<?php echo $val->tutor->first_name.' '.$val->tutor->last_name ?>" class="img-responsive" src="<?php echo base_url().($val->tutor->image ? '/upload/users/images/'.image_to_thumb($val->tutor->image) : 'themes/default/images/teacher/thumb-teacher-01.jpg') ?>" width="100" height="100">
@@ -117,7 +121,7 @@
                         <div class="course-content">
                             <h4><a href="<?php echo site_url('courses/detail/').str_replace(' ', '+', $val->title) ?>" title="<?php lang('action_view'); ?>" ><?php echo $val->title ?></a></h4>
                             <?php if(!$val->total_batches) { ?>
-                            <a disabled class="btn disabled"><?php echo lang('action_coming_soon') ?></a>
+                            <a  class="btn " href="<?php echo base_url().'ZeyobronSyllabus.pdf'?>"> Course Content<?php /*echo lang('action_coming_soon')*/ ?></a>
                             <?php } else { ?>
                             <a href="<?php echo site_url('bbooking/').str_replace(' ', '+', $val->title) ?>" class="btn"><?php echo lang('action_apply_now') ?></a>
                             <p><?php echo lang('menu_batches') ?> <?php echo $val->total_batches ? '+'.$val->total_batches : $val->total_batches; ?></p>
@@ -131,6 +135,60 @@
         </div><!-- Row -->
     </div><!-- Container -->
 </section><!-- Section Featured Courses -->
+<?php } ?>
+
+
+<!-- Section Testimonials -->
+<?php if(!empty($testimonials)) { ?>
+<section class="relative bg-light typo-light bg-cover overlay" data-background="<?php echo base_url('upload/home/').$this->settings->{'banner_image_2'} ?>">
+    <div class="container parent-has-overlay">
+        <div class="row rltd-items">
+            <!-- Column Begins -->
+            <div class="col-sm-12">
+                <div class="owl-carousel" 
+                    data-animatein="" 
+                    data-animateout="" 
+                    data-items="2" 
+                    data-loop="true" 
+                    data-merge="true" 
+                    data-nav="false" 
+                    data-dots="false" 
+                    data-stagepadding="" 
+                    data-margin="30"
+                    data-mobile="1" 
+                    data-tablet="1" 
+                    data-desktopsmall="2"  
+                    data-desktop="2" 
+                    data-autoplay="true" 
+                    data-delay="3000" 
+                    data-navigation="false">
+                    
+                    <!-- Item Ends -->
+                    <?php foreach($testimonials as $val) { ?>
+                    <div class="item">
+                        <!-- Blockquote Wrapper -->
+                        <div class="quote-wrap dark">
+                            <blockquote>        
+                                <p><?php echo $val->t_feedback; ?></p>
+                            </blockquote>
+                            <!-- Blockquote Author -->
+                            <div class="quote-author">
+                                <img width="80" height="80" src="<?php echo base_url('upload/testimonials/images/').image_to_thumb($val->image) ?>" class="img-responsive" alt="thumb">
+                                <!-- Blockquote Footer -->
+                                <div class="quote-footer">
+                                    <h5 class="name text-capitalize"><?php echo $val->t_name ?></h5>
+                                    <span class="text-capitalize">/ <?php echo $val->t_type ?></span>
+                                </div><!-- Blockquote Footer -->
+                            </div><!-- Blockquote Author -->
+                        </div><!-- Blockquote Wrapper -->
+                    </div><!-- Item Ends -->
+                    <?php } ?>
+
+                </div><!-- carousel -->
+            </div><!-- Column -->
+        </div><!-- Row -->
+    </div><!-- Container -->
+</section><!-- Section Testimonials -->
 <?php } ?>
 
 <!-- Section Featured Events -->
@@ -220,7 +278,7 @@
 
 
 <!-- Section About Institute -->
-<section id="about" class="bg-dark typo-light">
+<section id="about" class="bg-dark typo-light hidden">
     <div class="container">
         <div class="row counter-sm">
             <!-- Title -->
@@ -342,7 +400,7 @@
 
 <!-- Section Teachers -->
 <?php if(!empty($tutors)) { ?>
-<section id="teacher" class="bg-grey typo-dark">
+<section id="teacher" class="bg-grey typo-dark hidden">
     <div class="container">
         <div class="row">
             <!-- Title -->
@@ -394,7 +452,7 @@
 
 <!-- Section Blog -->
 <?php if(!empty($blogs)) {  ?>
-<section id="blog" class="typo-dark">
+<section id="blog" class="typo-dark hidden">
     <div class="container">
         <div class="row">
             <!-- Title -->
@@ -451,7 +509,7 @@
 
 <!-- Section Gallery -->
 <?php if(!empty($gallaries)) { ?>
-<section id="gallery" class="bg-grey typo-dark">
+<section id="gallery" class="bg-grey typo-dark hidden">
     <div class="container">
         
         <div class="row">
@@ -500,58 +558,6 @@
 <?php } ?>
 
 
-<!-- Section Testimonials -->
-<?php if(!empty($testimonials)) { ?>
-<section class="relative bg-light typo-light bg-cover overlay" data-background="<?php echo base_url('upload/home/').$this->settings->{'banner_image_2'} ?>">
-    <div class="container parent-has-overlay">
-        <div class="row rltd-items">
-            <!-- Column Begins -->
-            <div class="col-sm-12">
-                <div class="owl-carousel" 
-                    data-animatein="" 
-                    data-animateout="" 
-                    data-items="2" 
-                    data-loop="true" 
-                    data-merge="true" 
-                    data-nav="false" 
-                    data-dots="false" 
-                    data-stagepadding="" 
-                    data-margin="30"
-                    data-mobile="1" 
-                    data-tablet="1" 
-                    data-desktopsmall="2"  
-                    data-desktop="2" 
-                    data-autoplay="true" 
-                    data-delay="3000" 
-                    data-navigation="false">
-                    
-                    <!-- Item Ends -->
-                    <?php foreach($testimonials as $val) { ?>
-                    <div class="item">
-                        <!-- Blockquote Wrapper -->
-                        <div class="quote-wrap dark">
-                            <blockquote>        
-                                <p><?php echo $val->t_feedback; ?></p>
-                            </blockquote>
-                            <!-- Blockquote Author -->
-                            <div class="quote-author">
-                                <img width="80" height="80" src="<?php echo base_url('upload/testimonials/images/').image_to_thumb($val->image) ?>" class="img-responsive" alt="thumb">
-                                <!-- Blockquote Footer -->
-                                <div class="quote-footer">
-                                    <h5 class="name text-capitalize"><?php echo $val->t_name ?></h5>
-                                    <span class="text-capitalize">/ <?php echo $val->t_type ?></span>
-                                </div><!-- Blockquote Footer -->
-                            </div><!-- Blockquote Author -->
-                        </div><!-- Blockquote Wrapper -->
-                    </div><!-- Item Ends -->
-                    <?php } ?>
-
-                </div><!-- carousel -->
-            </div><!-- Column -->
-        </div><!-- Row -->
-    </div><!-- Container -->
-</section><!-- Section Testimonials -->
-<?php } ?>
 
 <!-- Section Contact -->
 <section id="contact" class="bg-lgrey"> 

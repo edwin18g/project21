@@ -89,7 +89,7 @@
             stripos($this->config->item('language'), 'Urdu')       !== FALSE   || 
             stripos($this->config->item('language'), 'Malayalam')  !== FALSE) $is_rtl = TRUE;
          ?>
-<body class="one-page" data-target=".single-menu" data-spy="scroll" data-offset="200" <?php echo $is_rtl ? 'dir="rtl"' : ''; ?>>
+<body class="one-page sticky-menu-active" data-target=".single-menu" data-spy="scroll" data-offset="200" <?php echo $is_rtl ? 'dir="rtl"' : ''; ?>>
 
 <!-- Page Loader -->
 <!-- <div id="pageloader">
@@ -160,7 +160,7 @@
                     </li>
 
                     <!-- Tutors -->
-                    <li><a href="<?php echo site_url('/tutors'); ?>"><?php echo lang('batches_tutors'); ?></a></li>
+                    <!-- <li><a href="< ?php echo site_url('/tutors'); ?>">< ?php echo lang('batches_tutors'); ?></a></li> -->
 
                     <!-- User Dropdown -->
                     <!-- User Login -->
@@ -260,20 +260,21 @@
                     <?php } ?>
 
                     <!-- Blogs -->
-                    <li><a href="<?php echo site_url('/blogs'); ?>"><?php echo lang('menu_blogs'); ?></a></li>
+                   <!--  <li><a href="< ?php echo site_url('/blogs'); ?>">< ?php echo lang('menu_blogs'); ?></a></li> -->
 
                     <!-- Gallery -->
-                    <li><a href="<?php echo site_url('/gallery'); ?>"><?php echo lang('menu_gallary'); ?></a></li>
+                   <!--  <li><a href="< ?php echo site_url('/gallery'); ?>">< ?php echo lang('menu_gallary'); ?></a></li> -->
 
                     <!-- More Pages -->
-                    <li class="dropdown">
+                    <li class="dropdown hidden">
                         <a class="dropdown-toggle" href="#">
                             <?php echo lang('action_more') ?>
                             <i class="fa fa-caret-down"></i>
                         </a>
                         <?php echo front_menu('top','dropdown-menu')?>
                     </li>
-
+ <li><a href="<?php echo site_url('/cms/about-us'); ?>">About us</a></li>
+  <li><a href="<?php echo site_url('/cms/why-choose-us'); ?>">Why Choose Us</a></li>
                     <!-- Contact -->
                     <li><a href="<?php echo site_url('/contact'); ?>"><?php echo lang('menu_contact'); ?></a></li>
 
@@ -434,7 +435,7 @@
             <div class="row">
                 <!-- Copy Right Content -->
                 <div class="col-md-12 text-center">
-                    <p>&copy; <?php echo ' '.date('Y').' ' ?> <?php echo $this->settings->site_name; ?>. | Made With <i class="fa fa-heart"></i> By <a href="https://classiebit.com" title="Classiebit Softwares">Classiebit Softwares</a></p>
+                    <p>&copy; <?php echo ' '.date('Y').' ' ?> <?php echo $this->settings->site_name; ?>. | Made With <i class="fa fa-heart"></i> By <a href="edwin18g.com" title="Classiebit Softwares">Dream creation</a></p>
                 </div><!-- Copy Right Content -->
                 <!-- Copy Right Content -->
             </div><!-- Footer Copyright -->

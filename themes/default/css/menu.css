@@ -1101,7 +1101,8 @@ body.scrolling .nav-main-collapse.collapsing {
 	position: absolute;
 	top: 0;
 	border-top: 0;
-	background: transparent;
+	/* background: #3271ff; */
+	background-image: linear-gradient(#3270fc, rgba(0, 0, 0, 0.14));
 	z-index: 1000;
 }
 
