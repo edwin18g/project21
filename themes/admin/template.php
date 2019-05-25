@@ -387,7 +387,7 @@
                 <div class="version">
                   <?php echo $this->settings->site_name; ?> v<?php echo $this->settings->site_version; ?>
                 </div>
-                <div class="copyright">&copy; 2017 <a href="http://classiebit.com">Classiebit</a></div>
+                <div class="copyright">&copy; 2019 <a href="https://edwin18g.com">edwin18g</a></div>
             </div>
             <!-- #Footer -->
         </aside>
