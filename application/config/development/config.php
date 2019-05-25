@@ -23,8 +23,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-<<<<<<< HEAD
-$config['base_url'] = 'http://zeyborn.edwin18g.com/';
-=======
 $config['base_url'] = 'http://pixoart.domain/';
->>>>>>> 3684c24a42e9aeeb30c8a46d4284a8d8ce3cf077
