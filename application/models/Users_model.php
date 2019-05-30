@@ -79,12 +79,24 @@ class Users_model extends CI_Model {
         return FALSE;
     }
 
+
+    public function enable_secure($param)
+    {
+        if(!empty($param['id']))
+        {
+            $this->db->where(array('id'=>$param['id']))
+                     ->update($this->table, $param);
+            return $id;
+        }
+    }
     /**
      * save_users
      *
      * @return array
      * 
      **/
+
+
     public function save_users($data = array(), $id = FALSE, $email = FALSE)
     {
         if($id) // update

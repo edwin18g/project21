@@ -13,41 +13,41 @@ class Make_mail {
 	
 	public function send($recipient = NULL, $subject = NULL, $message = NULL, $attached_file = NULL)
 	{	
-		$CI 			=& get_instance();
+		// $CI 			=& get_instance();
 		
-		if(empty($CI->settings->smtp_server) || empty($CI->settings->smtp_username) || empty($CI->settings->smtp_password) || empty($CI->settings->smtp_port) || empty($CI->settings->sender_email))
-		{
-			return TRUE;
-		}
+		// if(empty($CI->settings->smtp_server) || empty($CI->settings->smtp_username) || empty($CI->settings->smtp_password) || empty($CI->settings->smtp_port) || empty($CI->settings->sender_email))
+		// {
+		// 	return TRUE;
+		// }
 					
-		$config = array(
-					'smtp_host' => $CI->settings->smtp_server,
-					'smtp_port' => $CI->settings->smtp_port,
-					'smtp_user' => $CI->settings->smtp_username,
-					'smtp_pass' => $CI->settings->smtp_password,
-					'crlf' 		=> "\r\n",    							
-					'protocol'	=> 'smtp',
-				);
+		// $config = array(
+		// 			'smtp_host' => $CI->settings->smtp_server,
+		// 			'smtp_port' => $CI->settings->smtp_port,
+		// 			'smtp_user' => $CI->settings->smtp_username,
+		// 			'smtp_pass' => $CI->settings->smtp_password,
+		// 			'crlf' 		=> "\r\n",    							
+		// 			'protocol'	=> 'smtp',
+		// 		);
 		
-		// Send email 
-		$config['useragent'] 	= $CI->settings->site_name;
-		$config['mailtype'] 	= "html";
-		$config['newline'] 		= "\r\n";
-		$config['charset'] 		= 'utf-8';
-		$config['wordwrap'] 	= TRUE;
+		// // Send email 
+		// $config['useragent'] 	= $CI->settings->site_name;
+		// $config['mailtype'] 	= "html";
+		// $config['newline'] 		= "\r\n";
+		// $config['charset'] 		= 'utf-8';
+		// $config['wordwrap'] 	= TRUE;
 		
-		$CI->load->library('email', $config);
+		// $CI->load->library('email', $config);
 
-		$CI->email->from($CI->settings->sender_email, $CI->settings->site_name);
-		$CI->email->to($recipient);
+		// $CI->email->from($CI->settings->sender_email, $CI->settings->site_name);
+		// $CI->email->to($recipient);
 
-		$CI->email->subject($subject);
-		$CI->email->message($message);
+		// $CI->email->subject($subject);
+		// $CI->email->message($message);
 		
-		if(isset($attached_file))
-		    $CI->email->attach($attached_file);
+		// if(isset($attached_file))
+		//     $CI->email->attach($attached_file);
 		    
-		$CI->email->send();
+		// //$CI->email->send();
 	}
 }
 

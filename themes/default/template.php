@@ -15,15 +15,18 @@
     <!-- Web Fonts  -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-86125332-2', 'auto');
-        ga('send', 'pageview');
-    </script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138427976-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-138427976-2');
+</script>
+
+  
 
     <title><?php echo $page_title; ?> - <?php echo $this->settings->site_name; ?></title>
     <meta name="title" content="<?php echo $this->meta_title; ?>">
@@ -462,6 +465,66 @@
 <?php if($this->settings->disqus_short_name) { ?>
 <script id="dsq-count-scr" src='//'+disqus_short_name+'.disqus.com/count.js' async></script>
 <?php } ?>
+
+
+<!-- Modal -->
+<div id="secureDevice" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h6 class="modal-title">Make Sure It's your secure content access device ?</h6>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-default" id="makeItSecureDevice">Yes! process</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<?php 
+function rand_chars($c, $l, $u = FALSE) { 
+if (!$u) for ($s = '', $i = 0, $z = strlen($c)-1; $i < $l; $x = rand(0,$z), $s .= $c{$x}, $i++); 
+else for ($i = 0, $z = strlen($c)-1, $s = $c{rand(0,$z)}, $i = 1; $i != $l; $x = rand(0,$z), $s .= $c{$x}, $s = ($s{$i} == $s{$i-1} ? substr($s,0,-1) : $s), $i=strlen($s)); 
+return $s; 
+} 
+?> 
+<script>
+var base_url = '<?= base_url()?>';
+var secure_name = '<?= base64_encode('user_sec_id')?>';
+var secure_val = '<?= base64_encode(rand_chars('securedoggy',20))?>';
+<?php 
+if(secure_content())
+{ ?>
+    $(document).ready(function(){
+        $('#secureDevice').modal('show');
+        });
+
+        $('#makeItSecureDevice').click(function(){
+$(this).text('loading.. please wait');
+if (typeof(Storage) !== "undefined") {
+    localStorage.setItem(secure_name, secure_val);
+
+    $.ajax({url: base_url+"welcome/secure_create/"+secure_val,type:'get',
+         success: function(result){
+    $("#div1").html(result);
+  }});
+
+} else {
+  // Sorry! No Web Storage support..
+}
+
+});
+<?php }
+
+
+?>
+</script>
 </body>
 
 <!-- Load Facebook SDK for JavaScript -->
@@ -473,7 +536,11 @@
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId="+fb_app_id+"";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+
+
+
+</script>
 <?php } ?>
 
 </html>

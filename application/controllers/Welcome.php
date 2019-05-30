@@ -53,6 +53,7 @@ class Welcome extends Public_Controller {
      */
 	function index()
 	{
+       // echo "<pre>"; print_r($_SESSION);die;
         /* Initialize assets and title */
         $this
         ->add_plugin_theme(array(
@@ -94,7 +95,16 @@ class Welcome extends Public_Controller {
         $data['content'] = $this->load->view('welcome', $content_data, TRUE);
 		$this->load->view($this->template, $data);
 	}
-
+function secure_create($secure)
+{
+    $param                      = array();
+    $http_response              = array();
+    $param['id']                = $_SESSION['user_id'];
+    $param['secure_device']     = '1';
+    $param['secure_key']        = $secure;
+    $this->users_model->enable_secure($param);
+    $http_response['error']     = false;
+}
 }
 
 /* Welcome controller ends */

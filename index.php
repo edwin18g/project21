@@ -55,7 +55,7 @@
  */
 
 define('ENVIRONMENT', $_SERVER['REMOTE_ADDR'] !== '127.0.0.1' ? 'production' : 'development');
-
+//define('ENVIRONMENT', 'production');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -64,6 +64,7 @@ define('ENVIRONMENT', $_SERVER['REMOTE_ADDR'] !== '127.0.0.1' ? 'production' : '
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
  */
+
 switch (ENVIRONMENT)
 {
 	case 'development':

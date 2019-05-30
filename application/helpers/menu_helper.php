@@ -45,6 +45,33 @@ if ( ! function_exists('fetch_tree'))
 	}
 }	
 
+if ( ! function_exists('secure_content'))
+{
+	/**
+	 * Fetch Tree
+	 *
+	 * @return	array
+	 */
+	function secure_content() 
+	{
+		$return = false;
+		
+		if(isset($_SESSION['user_id']))
+		{
+			$CI 		= get_instance();
+			$result 	= $CI->db->where('id',$_SESSION['user_id'])
+						 ->get("users")
+						 ->row_array();
+			if(!empty($result) &&  $result['secure_device'] == '0' )
+			{
+				$return = true;
+			}
+		
+		}
+		
+		return $return;
+	}
+}	
 // ------------------------------------------------------------------------
 if ( ! function_exists('build_menu_levels')) 
 {
