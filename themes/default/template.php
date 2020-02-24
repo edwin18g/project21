@@ -14,7 +14,10 @@
     
     <!-- Web Fonts  -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
+    <link href="/assets/minimalist-blocks/contentc81e.css?2" rel="stylesheet" type="text/css" />
+    <link href="/contentbuilder/contentbuilderc9f0.css?8" rel="stylesheet" type="text/css" />
+    <script src="/contentbuilder/contentbuilder.minc9f0.js?8" type="text/javascript"></script>
+    <script src="/assets/minimalist-blocks/contentc81e.js?2" type="text/javascript"></script> 
 
       <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138427976-2"></script>
@@ -524,6 +527,12 @@ if (typeof(Storage) !== "undefined") {
 
 
 ?>
+
+var builder = new ContentBuilder({
+        container: '.cms-content',
+        snippetOpen: true,
+        clearPreferences: true
+    });
 </script>
 </body>
 

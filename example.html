@@ -1,0 +1,142 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<!-- Mirrored from innovademo.com/contentbox4/example.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Jan 2020 04:41:31 GMT -->
+<head>
+    <meta charset="utf-8">
+    <title>Default Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="#" />  
+    
+    <!-- Required css for production -->    
+    <link href="box/boxc4ca.css?1" rel="stylesheet" type="text/css" /> <!-- Box Framework css include (contains a simple css for sections) -->
+    <link href="assets/minimalist-blocks/contentc4ca.css?1" rel="stylesheet" type="text/css" /> <!-- Snippets css include (contains a simple css for content blocks/snippets) -->
+    
+    <script>
+        /* Load saved styles. This example use browser local storage to save the styles. You can use database for saving in your site or CMS. */
+        if (localStorage.getItem('maincss') != null) {
+            document.getElementsByTagName('head')[0].insertAdjacentHTML('beforeend', localStorage.getItem('maincss'));
+        }
+        if (localStorage.getItem('sectioncss') != null) {
+            document.getElementsByTagName('head')[0].insertAdjacentHTML('beforeend', localStorage.getItem('sectioncss'));
+        }
+    </script>
+
+    <link href="assets/scripts/simplelightbox/simplelightbox.css" rel="stylesheet" type="text/css" /> <!-- Lightbox css include -->
+    
+    <!-- Required css for editing (not needed in production) -->   
+    <link href="contentbuilder/contentbuilderc81e.css?2" rel="stylesheet" type="text/css" />
+    <link href="contentbox/contentboxc81e.css?2" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<div class="is-wrapper">
+    <!-- This is a sample content. You can load existing content from a database and place it in this area -->
+    <div class="is-section is-section-100 is-shadow-1 is-bg-grey">
+        <div class="is-boxes">
+            <div class="is-box-img is-box is-box-5">
+                <div class="is-boxes ">
+                    <div class="is-overlay">
+                        <div class="is-overlay-bg" style="background-image: url('assets/designs/images/AYIZz231214.jpg'); background-position: 0% 60%; transform: translateY(-13.8583px) scale(1.05);" data-bottom-top="transform:translateY(-120px) scale(1.05);" data-top-bottom="transform:translateY(120px) scale(1.05)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="is-box is-dark-text is-bg-light is-box-7">
+                <div class="is-boxes">
+                    <div class="is-box-centered">
+                        <div class="is-container container" style="max-width: 480px;">
+                            <div class="row clearfix">
+                                <div class="column full">
+                                    <h1 style="text-align: left;" class="">Give.</h1>
+                                    <p style="text-align: left;" class=""><i><span style="color: rgb(136, 136, 136);">"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."<br>Sarah Williams</span></i></p>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="column full">
+                                    <div class="spacer height-40"></div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="column full">
+                                    <p style="text-align: justify;" class="">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo ante, sit amet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Required js for production -->  
+<script src="assets/scripts/jquery-3.4.1.min.js" type="text/javascript"></script>  
+<script src="assets/scripts/simplelightbox/simple-lightbox.min.js" type="text/javascript"></script>
+
+<!-- Required js for editing (not needed in production) -->  
+<script src="assets/minimalist-blocks/contentc4ca.js?1" type="text/javascript"></script> <!-- Content blocks -->
+<script src="contentbuilder/contentbuilder.minc81e.js?2" type="text/javascript"></script>
+<script src="contentbox/contentbox.minc81e.js?2" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+
+        // Load content from database (in this example we use browser's localStorage. Normally you need to load saved content from database and place it directly inside div.is-wrapper above)
+        if (localStorage.getItem('mypage') != null) {
+           $(".is-wrapper").html(localStorage.getItem('mypage'));
+        }
+
+        //Enable editing
+        $(".is-wrapper").contentbox({
+            coverImageHandler: 'savecover.php', /* for uploading section background */
+            largerImageHandler: 'saveimage-large.php', /* for uploading larger image */
+            moduleConfig: [{
+                "moduleSaveImageHandler": "saveimage-module.php" /* for module purpose image saving (ex. slider) */
+            }],
+            onRender: function () {
+                //Add lightbox script (This is optional. If used, lightbox js & css must be included)
+                $('a.is-lightbox').simpleLightbox({ closeText: '<i style="font-size:35px" class="icon ion-ios-close-empty"></i>', navText: ['<i class="icon ion-ios-arrow-left"></i>', '<i class="icon ion-ios-arrow-right"></i>'], disableScroll: false });
+            },
+            onChange: function () {
+                //Auto Save
+                var timeoutId;
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(function () {
+                    save();                    
+                }, 1000);
+            }
+        });
+
+        $('a.is-lightbox').simpleLightbox({ closeText: '<i style="font-size:35px" class="icon ion-ios-close-empty"></i>', navText: ['<i class="icon ion-ios-arrow-left"></i>', '<i class="icon ion-ios-arrow-right"></i>'], disableScroll: false });
+
+    });
+
+    function save() {
+        //Save all base64 images into files on the server
+        $('.is-wrapper').data('contentbox').saveImages('saveimage.html', function(){
+
+            //Save Content
+            var sHTML = $('.is-wrapper').data('contentbox').html();
+            localStorage.setItem('mypage', sHTML); //In this example, save the content into browser's local storage.
+
+            //Save Styles (needed by content)
+            var sMainCss = $('.is-wrapper').data('contentbox').mainCss(); //mainCss() returns css that defines typography style for the body/entire page.
+            localStorage.setItem('maincss', sMainCss); //In this example, save the styles into browser's local storage.
+            var sSectionCss = $('.is-wrapper').data('contentbox').sectionCss(); //sectionCss returns css that define typography styles for certan section(s) on the page
+            localStorage.setItem('sectioncss', sSectionCss); //In this example, save the styles into browser's local storage.
+
+        });
+    }
+
+</script>
+
+<!-- Required js for production --> 
+<script src="box/box.js" type="text/javascript"></script> <!-- Box Framework js include -->
+
+</body>
+
+<!-- Mirrored from innovademo.com/contentbox4/example.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Jan 2020 04:41:57 GMT -->
+</html>
